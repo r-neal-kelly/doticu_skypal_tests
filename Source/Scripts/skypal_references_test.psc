@@ -2,7 +2,9 @@
 
 Scriptname skypal_references_test extends Quest
 
+FormList property form_list_temp auto
 FormList property form_list_SoulGemsAll auto
+
 Keyword property keyword_JobMerchant auto
 Keyword property keyword_unique_dragonborn auto
 Keyword property keyword_unique_player auto
@@ -10,14 +12,16 @@ Keyword property keyword_WeapTypeSword auto
 
 function Test()
     if (skypal.Has_DLL())
-        Test_Count_Disabled()
-        Test_Count_Enabled()
+        Test_Grid()
 
-        Test_Disable()
-        Test_Enable()
+        ;Test_Count_Disabled()
+        ;Test_Count_Enabled()
 
-        Test_Filter_Deleted()
-        Test_Filter_Enabled()
+        ;Test_Disable()
+        ;Test_Enable()
+
+        ;Test_Filter_Deleted()
+        ;Test_Filter_Enabled()
 
         ;Test_Sort_Distance()
         
@@ -33,6 +37,46 @@ function Test()
 endFunction
 
 ; tests
+function Test_Grid()
+    int i
+    int trials
+    float total_time
+    float start_time
+    float stop_time
+
+    Debug.Trace("Begin: skypal_references.Grid")
+    Debug.Trace("")
+
+    i = 0
+    trials = 100
+    total_time = 0
+    while i < trials
+        start_time = skypal.Milliseconds()
+        skypal.Milliseconds()
+        stop_time = skypal.Milliseconds()
+        total_time += stop_time - start_time
+        i += 1
+    endWhile
+    Debug.Trace("    (Milliseconds { trials: " + trials + ", average milliseconds: " + total_time / trials + " })")
+
+    i = 0
+    trials = 100
+    total_time = 0
+    while i < trials
+        start_time = skypal.Milliseconds()
+        ObjectReference[] grid_refs = skypal_references.Grid()
+        stop_time = skypal.Milliseconds()
+        total_time += stop_time - start_time
+        i += 1
+    endWhile
+    Debug.Trace("    (Grid { trials: " + trials + ", average milliseconds: " + total_time / trials + " })")
+
+    Debug.Trace("")
+
+    Debug.Trace("End: skypal_references.Grid")
+    Debug.Trace("")
+endFunction
+
 function Test_Count_Disabled()
     float start_time
     float stop_time

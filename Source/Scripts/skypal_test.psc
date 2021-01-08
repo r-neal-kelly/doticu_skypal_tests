@@ -1,13 +1,18 @@
 ; Copyright © 2020 r-neal-kelly, aka doticu
 
-Scriptname skypal_test extends Quest
+Scriptname skypal_test extends ReferenceAlias
 
-; Runs only once.
 event OnInit()
-    RegisterForSingleUpdate(1)
+    RegisterForSingleUpdate(2)
+endEvent
+
+event OnPlayerLoadGame()
+    RegisterForSingleUpdate(2)
 endEvent
 
 event OnUpdate()
-    ((self as Quest) as skypal_references_test).Test()
-    ((self as Quest) as skypal_bases_test).Test()
+    Debug.Notification("SkyPal Tests: Starting...")
+    (GetOwningQuest() as skypal_references_test).Test()
+    (GetOwningQuest() as skypal_bases_test).Test()
+    Debug.MessageBox("SkyPal Tests: Finished!")
 endEvent
