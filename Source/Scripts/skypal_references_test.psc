@@ -2,6 +2,8 @@
 
 Scriptname skypal_references_test extends Quest
 
+Actor property actor_player auto
+
 FormList property form_list_temp auto
 FormList property form_list_SoulGemsAll auto
 
@@ -13,6 +15,8 @@ Keyword property keyword_WeapTypeSword auto
 function Test()
     if (skypal.Has_DLL())
         Test_Grid()
+
+        Test_Filter_Potential_Thieves()
 
         ;Test_Count_Disabled()
         ;Test_Count_Enabled()
@@ -40,6 +44,7 @@ endFunction
 function Test_Grid()
     int i
     int trials
+    int result_count
     float total_time
     float start_time
     float stop_time
@@ -47,29 +52,20 @@ function Test_Grid()
     Debug.Trace("Begin: skypal_references.Grid")
     Debug.Trace("")
 
-    i = 0
-    trials = 100
-    total_time = 0
-    while i < trials
-        start_time = skypal.Milliseconds()
-        skypal.Milliseconds()
-        stop_time = skypal.Milliseconds()
-        total_time += stop_time - start_time
-        i += 1
-    endWhile
-    Debug.Trace("    (Milliseconds { trials: " + trials + ", average milliseconds: " + total_time / trials + " })")
-
-    i = 0
-    trials = 100
-    total_time = 0
-    while i < trials
-        start_time = skypal.Milliseconds()
-        ObjectReference[] grid_refs = skypal_references.Grid()
-        stop_time = skypal.Milliseconds()
-        total_time += stop_time - start_time
-        i += 1
-    endWhile
-    Debug.Trace("    (Grid { trials: " + trials + ", average milliseconds: " + total_time / trials + " })")
+    if true
+        i = 0
+        trials = 100
+        total_time = 0
+        while i < trials
+            start_time = skypal.Milliseconds()
+            skypal_references.Grid()
+            stop_time = skypal.Milliseconds()
+            total_time += stop_time - start_time
+            i += 1
+        endWhile
+        result_count = skypal_references.Grid().length
+        Trace_Test("()", result_count, trials, total_time)
+    endIf
 
     Debug.Trace("")
 
@@ -77,7 +73,113 @@ function Test_Grid()
     Debug.Trace("")
 endFunction
 
-function Test_Count_Disabled()
+function Test_Filter_Potential_Thieves()
+    int i
+    int trials
+    int result_count
+    float total_time
+    float start_time
+    float stop_time
+
+    Debug.Trace("Begin: skypal_references.Filter_Potential_Thieves")
+    Debug.Trace("")
+
+    ObjectReference[] grid_refs = skypal_references.Grid()
+    Actor[] thieves = new Actor[1]
+    thieves[0] = actor_player
+
+    if true
+        i = 0
+        trials = 100
+        total_time = 0
+        while i < trials
+            start_time = skypal.Milliseconds()
+            skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "|")
+            stop_time = skypal.Milliseconds()
+            total_time += stop_time - start_time
+            i += 1
+        endWhile
+        result_count = skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "|").length
+        Trace_Test("(grid, [player], '|')", result_count, trials, total_time)
+    endIf
+    if true
+        i = 0
+        trials = 100
+        total_time = 0
+        while i < trials
+            start_time = skypal.Milliseconds()
+            skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "&")
+            stop_time = skypal.Milliseconds()
+            total_time += stop_time - start_time
+            i += 1
+        endWhile
+        result_count = skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "&").length
+        Trace_Test("(grid, [player], '&')", result_count, trials, total_time)
+    endIf
+    if true
+        i = 0
+        trials = 100
+        total_time = 0
+        while i < trials
+            start_time = skypal.Milliseconds()
+            skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "^")
+            stop_time = skypal.Milliseconds()
+            total_time += stop_time - start_time
+            i += 1
+        endWhile
+        result_count = skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "^").length
+        Trace_Test("(grid, [player], '^')", result_count, trials, total_time)
+    endIf
+    if true
+        i = 0
+        trials = 100
+        total_time = 0
+        while i < trials
+            start_time = skypal.Milliseconds()
+            skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "!|")
+            stop_time = skypal.Milliseconds()
+            total_time += stop_time - start_time
+            i += 1
+        endWhile
+        result_count = skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "!|").length
+        Trace_Test("(grid, [player], '!|')", result_count, trials, total_time)
+    endIf
+    if true
+        i = 0
+        trials = 100
+        total_time = 0
+        while i < trials
+            start_time = skypal.Milliseconds()
+            skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "!&")
+            stop_time = skypal.Milliseconds()
+            total_time += stop_time - start_time
+            i += 1
+        endWhile
+        result_count = skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "!&").length
+        Trace_Test("(grid, [player], '!&')", result_count, trials, total_time)
+    endIf
+    if true
+        i = 0
+        trials = 100
+        total_time = 0
+        while i < trials
+            start_time = skypal.Milliseconds()
+            skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "!^")
+            stop_time = skypal.Milliseconds()
+            total_time += stop_time - start_time
+            i += 1
+        endWhile
+        result_count = skypal_references.Filter_Potential_Thieves(grid_refs, thieves, "!^").length
+        Trace_Test("(grid, [player], '!^')", result_count, trials, total_time)
+    endIf
+
+    Debug.Trace("")
+
+    Debug.Trace("End: skypal_references.Filter_Potential_Thieves")
+    Debug.Trace("")
+endFunction
+
+;/function Test_Count_Disabled()
     float start_time
     float stop_time
 
@@ -289,7 +391,7 @@ function Test_Sort_Distance()
     Debug.Trace("")
 endFunction
 
-;/function Test_Filter_Bases_Form_List()
+function Test_Filter_Bases_Form_List()
     Debug.Trace("Begin: Test_Filter_Bases_Form_List")
     Debug.Trace("")
 
@@ -432,6 +534,29 @@ function Test_Filter_Grid_Actor_Flora() global
 endFunction/;
 
 ; helpers
+float function Average_Milliseconds_Time(int trials)
+    float total_time = 0.0
+    float start_time
+    float stop_time
+    int i = 0
+    while i < trials
+        start_time = skypal.Milliseconds()
+        skypal.Milliseconds()
+        stop_time = skypal.Milliseconds()
+        total_time += stop_time - start_time
+        i += 1
+    endWhile
+    return total_time / trials
+endFunction
+
+function Trace_Test(string test_name, int result_count, int trials, float total_time)
+    Debug.Trace("    " + test_name + " { " + \
+                "result_count: " + result_count + ", " + \
+                "trials: " + trials + ", " + \
+                "average milliseconds: " + (total_time / trials - Average_Milliseconds_Time(trials)) + \
+                " }")
+endFunction
+
 function Trace_References(ObjectReference[] references, float milliseconds, int MAX_TO_DISPLAY = 50)
     Debug.Trace("    total: " + references.length + ", milliseconds: " + milliseconds + ". (Showing up to " + MAX_TO_DISPLAY + ".)")
 
