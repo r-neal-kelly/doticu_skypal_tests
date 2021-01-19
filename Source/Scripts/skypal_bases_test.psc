@@ -1,6 +1,6 @@
 ; Copyright © 2020 r-neal-kelly, aka doticu
 
-Scriptname skypal_bases_test extends Quest
+Scriptname SkyPal_Bases_Test extends Quest
 
 function Test()
     if (skypal.Has_DLL())

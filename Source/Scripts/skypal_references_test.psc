@@ -1,6 +1,6 @@
 ; Copyright © 2020 r-neal-kelly, aka doticu
 
-Scriptname skypal_references_test extends Quest
+Scriptname SkyPal_References_Test extends Quest
 
 Actor property actor_player auto
 

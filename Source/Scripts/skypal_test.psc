@@ -1,6 +1,6 @@
 ; Copyright © 2020 r-neal-kelly, aka doticu
 
-Scriptname skypal_test extends ReferenceAlias
+Scriptname SkyPal_Test extends ReferenceAlias
 
 event OnInit()
     RegisterForSingleUpdate(2)
@@ -12,7 +12,34 @@ endEvent
 
 event OnUpdate()
     Debug.Notification("SkyPal Tests: Starting...")
-    (GetOwningQuest() as skypal_references_test).Test()
-    (GetOwningQuest() as skypal_bases_test).Test()
+    Test()
+    (GetOwningQuest() as SkyPal_References_Test).Test()
+    (GetOwningQuest() as SkyPal_Bases_Test).Test()
     Debug.MessageBox("SkyPal Tests: Finished!")
 endEvent
+
+function Test()
+    Test_Has_Version()
+endFunction
+
+function Test_Has_Version()
+    if SkyPal.Has_Version(1, 0, 0, "==") == false
+        Debug.Trace("    Has_Version failed ==.")
+    endIf
+    if SkyPal.Has_Version(1, 0, 0, "!=") == true
+        Debug.Trace("    Has_Version failed !=.")
+    endIf
+    if SkyPal.Has_Version(1, 0, 0, "<") == true
+        Debug.Trace("    Has_Version failed <.")
+    endIf
+    if SkyPal.Has_Version(1, 0, 0, ">") == true
+        Debug.Trace("    Has_Version failed >.")
+    endIf
+    if SkyPal.Has_Version(1, 0, 0, "<=") == false
+        Debug.Trace("    Has_Version failed <=.")
+    endIf
+    if SkyPal.Has_Version(1, 0, 0, ">=") == false
+        Debug.Trace("    Has_Version failed >=.")
+    endIf
+    Debug.Trace("    Completed Has_Version tests.")
+endFunction
