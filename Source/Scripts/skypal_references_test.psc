@@ -16,6 +16,8 @@ function Test()
     if (skypal.Has_DLL())
         Test_Grid()
 
+        Test_Change_Collision_Layer_Types()
+
         Test_Filter_Potential_Thieves()
 
         ;Test_Count_Disabled()
@@ -70,6 +72,47 @@ function Test_Grid()
     Debug.Trace("")
 
     Debug.Trace("End: skypal_references.Grid")
+    Debug.Trace("")
+endFunction
+
+function Test_Change_Collision_Layer_Types()
+    int i
+    int trials
+    int result_count
+    float total_time
+    float start_time
+    float stop_time
+
+    Debug.Trace("Begin: skypal_references.Change_Collision_Layer_Type")
+    Debug.Trace("")
+
+    ObjectReference[] grid_refs = skypal_references.Grid()
+
+    ;int[] form_types = new int[1]
+    ;form_types[0] = 62; ACTOR
+    ;ObjectReference[] filtered = skypal_references.Filter_Form_Types(grid_refs, form_types)
+
+    int[] collision_layer_types = new int[1]
+    collision_layer_types[0] = 13; TERRAIN
+    ObjectReference[] filtered = skypal_references.Filter_Collision_Layer_Types(grid_refs, collision_layer_types, "!")
+
+    if true
+        i = 0
+        trials = 100
+        total_time = 0
+        while i < trials
+            start_time = skypal.Milliseconds()
+            skypal_references.Change_Collision_Layer_Type(filtered, 42); PATH_PICKER disables collision without falling through world
+            stop_time = skypal.Milliseconds()
+            total_time += stop_time - start_time
+            i += 1
+        endWhile
+        Trace_Test("(Form_Types[ACTOR], PATH_PICKER)", 0, trials, total_time)
+    endIf
+
+    Debug.Trace("")
+
+    Debug.Trace("End: skypal_references.Change_Collision_Layer_Type")
     Debug.Trace("")
 endFunction
 
