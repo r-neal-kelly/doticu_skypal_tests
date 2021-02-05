@@ -93,7 +93,7 @@ function Test_Change_Collision_Layer_Types()
     ;ObjectReference[] filtered = skypal_references.Filter_Form_Types(grid_refs, form_types)
 
     int[] collision_layer_types = new int[1]
-    collision_layer_types[0] = 13; TERRAIN
+    collision_layer_types[0] = 13; SkyPal_Enum_Collision_Layer_Type.k_TERRAIN
     ObjectReference[] filtered = skypal_references.Filter_Collision_Layer_Types(grid_refs, collision_layer_types, "!")
 
     if true
