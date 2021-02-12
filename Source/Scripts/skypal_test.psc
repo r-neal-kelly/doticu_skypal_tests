@@ -23,19 +23,19 @@ function Test()
 endFunction
 
 function Test_Has_Version()
-    if SkyPal.Has_Version(1, 0, 0, "==") == false
+    if SkyPal.Has_Version(1, 0, 1, "==") == false
         Debug.Trace("    Has_Version failed ==.")
     endIf
-    if SkyPal.Has_Version(1, 0, 0, "!=") == true
+    if SkyPal.Has_Version(1, 0, 1, "!=") == true
         Debug.Trace("    Has_Version failed !=.")
     endIf
-    if SkyPal.Has_Version(1, 0, 0, "<") == true
+    if SkyPal.Has_Version(1, 0, 1, "<") == true
         Debug.Trace("    Has_Version failed <.")
     endIf
-    if SkyPal.Has_Version(1, 0, 0, ">") == true
+    if SkyPal.Has_Version(1, 0, 0, ">") == false
         Debug.Trace("    Has_Version failed >.")
     endIf
-    if SkyPal.Has_Version(1, 0, 0, "<=") == false
+    if SkyPal.Has_Version(1, 0, 1, "<=") == false
         Debug.Trace("    Has_Version failed <=.")
     endIf
     if SkyPal.Has_Version(1, 0, 0, ">=") == false
