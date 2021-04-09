@@ -16,15 +16,15 @@ function Test()
     if (skypal.Has_DLL())
         Test_Grid()
 
-        Test_Change_Collision_Layer_Types()
+        ;Test_Change_Collision_Layer_Types()
 
-        Test_Filter_Potential_Thieves()
+        ;Test_Filter_Potential_Thieves()
 
         ;Test_Count_Disabled()
         ;Test_Count_Enabled()
 
-        ;Test_Disable()
-        ;Test_Enable()
+        Test_Disable()
+        Test_Enable()
 
         ;Test_Filter_Deleted()
         ;Test_Filter_Enabled()
@@ -222,50 +222,6 @@ function Test_Filter_Potential_Thieves()
     Debug.Trace("")
 endFunction
 
-;/function Test_Count_Disabled()
-    float start_time
-    float stop_time
-
-    Debug.Trace("Begin: skypal_references.Count_Disabled")
-    Debug.Trace("")
-
-    ObjectReference[] grid_refs = skypal_references.Grid()
-    Debug.Trace("    (grid_ref_count: " + grid_refs.length + ")")
-    Debug.Trace("")
-
-    Debug.Trace("    (grid_refs)")
-    start_time = skypal.Milliseconds()
-    int count = skypal_references.Count_Disabled(grid_refs)
-    stop_time = skypal.Milliseconds()
-    Debug.Trace("    (count: " + count + ", milliseconds: " + (stop_time - start_time) + ".)")
-    Debug.Trace("")
-
-    Debug.Trace("End: skypal_references.Count_Disabled")
-    Debug.Trace("")
-endFunction
-
-function Test_Count_Enabled()
-    float start_time
-    float stop_time
-
-    Debug.Trace("Begin: skypal_references.Count_Enabled")
-    Debug.Trace("")
-
-    ObjectReference[] grid_refs = skypal_references.Grid()
-    Debug.Trace("    (grid_ref_count: " + grid_refs.length + ")")
-    Debug.Trace("")
-
-    Debug.Trace("    (grid_refs)")
-    start_time = skypal.Milliseconds()
-    int count = skypal_references.Count_Enabled(grid_refs)
-    stop_time = skypal.Milliseconds()
-    Debug.Trace("    (count: " + count + ", milliseconds: " + (stop_time - start_time) + ".)")
-    Debug.Trace("")
-
-    Debug.Trace("End: skypal_references.Count_Enabled")
-    Debug.Trace("")
-endFunction
-
 function Test_Disable()
     float start_time
     float stop_time
@@ -323,6 +279,50 @@ function Test_Enable()
     Debug.Trace("")
 
     Debug.Trace("End: skypal_references.Enable")
+    Debug.Trace("")
+endFunction
+
+;/function Test_Count_Disabled()
+    float start_time
+    float stop_time
+
+    Debug.Trace("Begin: skypal_references.Count_Disabled")
+    Debug.Trace("")
+
+    ObjectReference[] grid_refs = skypal_references.Grid()
+    Debug.Trace("    (grid_ref_count: " + grid_refs.length + ")")
+    Debug.Trace("")
+
+    Debug.Trace("    (grid_refs)")
+    start_time = skypal.Milliseconds()
+    int count = skypal_references.Count_Disabled(grid_refs)
+    stop_time = skypal.Milliseconds()
+    Debug.Trace("    (count: " + count + ", milliseconds: " + (stop_time - start_time) + ".)")
+    Debug.Trace("")
+
+    Debug.Trace("End: skypal_references.Count_Disabled")
+    Debug.Trace("")
+endFunction
+
+function Test_Count_Enabled()
+    float start_time
+    float stop_time
+
+    Debug.Trace("Begin: skypal_references.Count_Enabled")
+    Debug.Trace("")
+
+    ObjectReference[] grid_refs = skypal_references.Grid()
+    Debug.Trace("    (grid_ref_count: " + grid_refs.length + ")")
+    Debug.Trace("")
+
+    Debug.Trace("    (grid_refs)")
+    start_time = skypal.Milliseconds()
+    int count = skypal_references.Count_Enabled(grid_refs)
+    stop_time = skypal.Milliseconds()
+    Debug.Trace("    (count: " + count + ", milliseconds: " + (stop_time - start_time) + ".)")
+    Debug.Trace("")
+
+    Debug.Trace("End: skypal_references.Count_Enabled")
     Debug.Trace("")
 endFunction
 
