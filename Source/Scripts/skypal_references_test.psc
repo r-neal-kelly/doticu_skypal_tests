@@ -14,7 +14,10 @@ Keyword property keyword_WeapTypeSword auto
 
 function Test()
     if (skypal.Has_DLL())
-        Test_Grid()
+        Test_All()
+        ;Test_Grid()
+
+        Test_All_Filter_Bases_Form_List()
 
         ;Test_Change_Collision_Layer_Types()
 
@@ -23,8 +26,8 @@ function Test()
         ;Test_Count_Disabled()
         ;Test_Count_Enabled()
 
-        Test_Disable()
-        Test_Enable()
+        ;Test_Disable()
+        ;Test_Enable()
 
         ;Test_Filter_Deleted()
         ;Test_Filter_Enabled()
@@ -43,6 +46,38 @@ function Test()
 endFunction
 
 ; tests
+function Test_All()
+    int i
+    int trials
+    int result_count
+    float total_time
+    float start_time
+    float stop_time
+
+    Debug.Trace("Begin: skypal_references.All")
+    Debug.Trace("")
+
+    if true
+        i = 0
+        trials = 8
+        total_time = 0
+        while i < trials
+            start_time = skypal.Milliseconds()
+            skypal_references.All()
+            stop_time = skypal.Milliseconds()
+            total_time += stop_time - start_time
+            i += 1
+        endWhile
+        result_count = skypal_references.All().length
+        Trace_Test("()", result_count, trials, total_time)
+    endIf
+
+    Debug.Trace("")
+
+    Debug.Trace("End: skypal_references.All")
+    Debug.Trace("")
+endFunction
+
 function Test_Grid()
     int i
     int trials
@@ -279,6 +314,53 @@ function Test_Enable()
     Debug.Trace("")
 
     Debug.Trace("End: skypal_references.Enable")
+    Debug.Trace("")
+endFunction
+
+function Test_All_Filter_Bases_Form_List()
+    int i
+    int trials
+    int result_count
+    float total_time
+    float start_time
+    float stop_time
+
+    Debug.Trace("Begin: skypal_references.All_Filter_Bases_Form_List")
+    Debug.Trace("")
+
+    if true
+        i = 0
+        trials = 8
+        total_time = 0
+        while i < trials
+            start_time = skypal.Milliseconds()
+            skypal_references.All_Filter_Bases_Form_List(form_list_SoulGemsAll, "")
+            stop_time = skypal.Milliseconds()
+            total_time += stop_time - start_time
+            i += 1
+        endWhile
+        result_count = skypal_references.All_Filter_Bases_Form_List(form_list_SoulGemsAll, "").length
+        Trace_Test("(form_list_SoulGemsAll, '')", result_count, trials, total_time)
+    endIf
+
+    if false
+        i = 0
+        trials = 8
+        total_time = 0
+        while i < trials
+            start_time = skypal.Milliseconds()
+            skypal_references.All_Filter_Bases_Form_List(form_list_SoulGemsAll, "!")
+            stop_time = skypal.Milliseconds()
+            total_time += stop_time - start_time
+            i += 1
+        endWhile
+        result_count = skypal_references.All_Filter_Bases_Form_List(form_list_SoulGemsAll, "!").length
+        Trace_Test("(form_list_SoulGemsAll, '!')", result_count, trials, total_time)
+    endIf
+
+    Debug.Trace("")
+
+    Debug.Trace("End: skypal_references.All_Filter_Bases_Form_List")
     Debug.Trace("")
 endFunction
 

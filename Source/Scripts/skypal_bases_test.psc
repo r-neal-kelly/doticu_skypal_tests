@@ -4,7 +4,7 @@ Scriptname SkyPal_Bases_Test extends Quest
 
 function Test()
     if (skypal.Has_DLL())
-        Test_From_References()
+        ;Test_From_References()
     endIf
 endFunction
 
@@ -15,17 +15,17 @@ function Test_From_References()
     Debug.Trace("Begin: skypal_bases.From_References")
     Debug.Trace("")
 
-    ObjectReference[] grid_refs = skypal_references.Grid()
+    ObjectReference[] all_refs = skypal_references.All()
 
-    Debug.Trace("    (grid_refs, .)")
+    Debug.Trace("    (all_refs, .)")
     start_time = skypal.Milliseconds()
-    Form[] bases_b = skypal_bases.From_References(grid_refs, ".")
+    Form[] bases_b = skypal_bases.From_References(all_refs, ".")
     Trace_Bases(bases_b, skypal.Milliseconds() - start_time, 15)
     Debug.Trace("")
 
-    Debug.Trace("    (grid_refs, ...)")
+    Debug.Trace("    (all_refs, ...)")
     start_time = skypal.Milliseconds()
-    Form[] bases_a = skypal_bases.From_References(grid_refs, "...")
+    Form[] bases_a = skypal_bases.From_References(all_refs, "...")
     Trace_Bases(bases_a, skypal.Milliseconds() - start_time, 15)
     Debug.Trace("")
     
