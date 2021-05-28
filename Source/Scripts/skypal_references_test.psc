@@ -14,10 +14,11 @@ Keyword property keyword_WeapTypeSword auto
 
 function Test()
     if (skypal.Has_DLL())
-        Test_All()
+        ;Test_All()
         ;Test_Grid()
+        Test_From_Container()
 
-        Test_All_Filter_Bases_Form_List()
+        ;Test_All_Filter_Bases_Form_List()
 
         ;Test_Change_Collision_Layer_Types()
 
@@ -107,6 +108,28 @@ function Test_Grid()
     Debug.Trace("")
 
     Debug.Trace("End: skypal_references.Grid")
+    Debug.Trace("")
+endFunction
+
+function Test_From_Container()
+    Debug.Trace("Begin: skypal_references.From_Container")
+
+    ObjectReference[] grid = skypal_references.Grid()
+    int idx = 0
+    while (idx < grid.length)
+        ObjectReference[] refs = skypal_references.From_Container(grid[idx])
+        if (refs.length > 0)
+            Debug.Trace("    " + (grid[idx] as string) + ": " + grid[idx].GetBaseObject().GetName() + " count: " + refs.length)
+            int refs_idx = 0
+            while (refs_idx < refs.length)
+                Debug.Trace("    " + "    " + (refs[refs_idx] as string) + ": " + refs[refs_idx].GetBaseObject().GetName())
+                refs_idx += 1
+            endWhile
+        endIf
+        idx += 1
+    endWhile
+
+    Debug.Trace("End: skypal_references.From_Container")
     Debug.Trace("")
 endFunction
 
